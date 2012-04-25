@@ -1,7 +1,7 @@
-Google DFP
+Rating-Widget
 ==========
 
-Ruby On Rails helpers and assets for [Google DFP](http://www.google.com/dfp/).
+Ruby On Rails helpers and assets for Ratings
 
 
 Installation
@@ -9,30 +9,50 @@ Installation
 
 Gemfile:
 
-    gem 'google_dfp', :git => 'git://github.com/digineo/google_dfp.git'
-
-Create a `/config/google_dfp.yml` in your rails project containing all configured ads:
-
-	leaderboard:
-	  size: 728x90
-	  unit: /123456/leaderboard
-	skyscraper:
-	  size: 120x600
-	  unit: /123456/bigsize
+    gem 'rating_widget', :git => 'git://github.com/digineo/rating_widget.git'
 
 Add the supplied javascript to your asset pipeline (e. g. `/app/assets/javascripts/application.js`)
 
-	//= require google_dfp
+	//= require rating_widget
 
-Please ensure the `google_dfp.js` is inserted at the bottom of your `<body>` element and jQuery is loaded before.
+Please ensure the `rating_widget.js` is inserted at the bottom of your `<body>` element and jQuery is loaded before.
 
 
 Usage
 -----
 
-Just call the `dfp_tag` helper in any view to include insert a DFP tag.
+Just call the `rating_tag` helper in any view to include insert a rating widget tag:
 
-	<%= dfp_tag :leaderboard %>
+rating_tag(tag_id, option_texts, initial)
+	
+Parameters:
+	tag_id = The html-container-id for the rating-widget
+	option_texts = A hash with key as the option text and value as the count of rating stars
+				   e.g.: {"sehr schlecht" => 1, "schlecht" => 2, "mittelmäßig" => 3, "gut" => 4, "sehr gut" => 5}
+	initial = The initial value of stars (dynamically from the model-attribute for the rating)
+	
+Example:
+	
+	rating_tag("rating_#{mailing.id}", Mailing::RATING_OPTION_TEXTS, mailing.rating)
+	
+	
+Javascript:
+----------
+
+Just use the rating-method on the select-tag which you have rendered with the above mentioned helper-method
+
+Example:
+
+var rater = $(element).find('select');
+rater.rating({
+        uri: document.location.pathname + '/' + mailingId,
+        param: 'mailing[rating]'
+});
+
+You have to pass two parameters for the rating-method:
+	uri = The PUT uri of the model to update the rating-attribute
+	param = The qualified rating-attribute    
+      
 
 
 Copyright
