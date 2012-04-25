@@ -54,6 +54,22 @@ You have to pass two parameters for the rating-method:
 	param = The qualified rating-attribute    
       
 
+Locales:
+--------
+
+The option values and texts for the stars are generated with the definition in the application locales as the named context 'rating'
+
+Example:
+
+de
+  rating
+    "1": sehr schlecht
+    "2": schlecht
+    "3": mittelmäßig
+    "4": gut
+    "5": sehr gut
+
+
 
 Copyright
 ---------
