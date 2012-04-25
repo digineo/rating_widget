@@ -12,7 +12,7 @@ module RatingWidget
     def rating_display(value, max=5)
       rating_html = '<div class="ui-rating">'
       max.times { |i|
-        value > i ? rating_html << '<div class="ui-rating-star ui-rating-full"></div>' : rating_html << '<div class="ui-rating-star ui-rating-empty"></div>'
+        rating_html << value>i ? '<div class="ui-rating-star ui-rating-full"></div>' : '<div class="ui-rating-star ui-rating-empty"></div>'
       }
       rating_html << '</div>'
       rating_html.html_safe
