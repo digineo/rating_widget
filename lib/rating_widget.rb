@@ -8,15 +8,11 @@ module RatingWidget
       select_tag tag_id, options_for_select(create_option_texts(max_rating), value), :include_blank => true
     end
     
-    def rating_display(value, max_rating)
+    def rating_display(value, max_rating=5)
       rating_html = '<div class="ui-rating">'
       max_rating.times { |rating|
-        attrs = { :class=>"ui-rating-star" }
-        if value > rating
-          attrs[:class] << "ui-rating-full"
-        else
-          attrs[:class] << "ui-rating-empty"
-        end
+        attrs = { :class =>"ui-rating-star " }
+        value > rating ? attrs[:class] << "ui-rating-full" : attrs[:class] << "ui-rating-empty"
         rating_html << content_tag("div", "", attrs)
       }
       rating_html << '</div>'
@@ -25,7 +21,7 @@ module RatingWidget
     
     def create_option_texts(max_rating)
       option_texts = {}
-      (1..max_rating).each { |rating|
+      max_rating.times.map { |rating|
         option_texts[I18n.t("rating.#{rating}")] = rating
       }
       option_texts
