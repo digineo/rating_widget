@@ -170,15 +170,19 @@
       
       // Wenn die URI in den Options gesetzt ist, wird ein AJAX-Call zum Update des Models ausgeführt:
       if (null != this.options.uri) {
-        $.ajax({
-          type: 'PUT',
-          url: this.options.uri + "?" + this.options.param + "=" + value,
-          success: function(){
-          },
-          error: function(request){
-            alert(request.responseText);
-          }
-        });
+        if ($.isFunction(this.options.uri)) {
+          this.options.uri.apply(this.element, [this.options.param, value]);
+        } else {
+          $.ajax({
+            type: 'PUT',
+            url: this.options.uri + "?" + this.options.param + "=" + value,
+            success: function(){
+            },
+            error: function(request){
+              alert(request.responseText);
+            }
+          });
+        }
       }
     },
     
