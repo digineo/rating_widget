@@ -26,14 +26,14 @@ Just call the `rating_tag` helper in any view to include insert a rating widget 
 rating_tag(tag_id, option_texts, initial)
 	
 Parameters:
-	tag_id = The html-container-id for the rating-widget
-	option_texts = A hash with key as the option text and value as the count of rating stars
-				   e.g.: {"sehr schlecht" => 1, "schlecht" => 2, "mittelmäßig" => 3, "gut" => 4, "sehr gut" => 5}
-	initial = The initial value of stars (dynamically from the model-attribute for the rating)
+tag_id = The html-container-id for the rating-widget
+option_texts = A hash with key as the option text and value as the count of rating stars
+			   e.g.: {"sehr schlecht" => 1, "schlecht" => 2, "mittelmäßig" => 3, "gut" => 4, "sehr gut" => 5}
+initial = The initial value of stars (dynamically from the model-attribute for the rating)
 	
 Example:
 	
-	rating_tag("rating_#{mailing.id}", Mailing::RATING_OPTION_TEXTS, mailing.rating)
+	rating_tag("rating_#{mailing.id}", {"sehr schlecht" => 1, "schlecht" => 2, "mittelmäßig" => 3, "gut" => 4, "sehr gut" => 5}, mailing.rating)
 	
 	
 Javascript:
@@ -43,15 +43,15 @@ Just use the rating-method on the select-tag which you have rendered with the ab
 
 Example:
 
-var rater = $(element).find('select');
-rater.rating({
-        uri: document.location.pathname + '/' + mailingId,
-        param: 'mailing[rating]'
-});
+	var rater = $(element).find('select');
+	rater.rating({
+	        uri: document.location.pathname + '/' + mailingId,
+	        param: 'mailing[rating]'
+	});
 
 You have to pass two parameters for the rating-method:
-	uri = The PUT uri of the model to update the rating-attribute
-	param = The qualified rating-attribute    
+uri = The PUT uri of the model to update the rating-attribute
+param = The qualified rating-attribute    
       
 
 Locales:
@@ -61,13 +61,13 @@ The option values and texts for the stars are generated with the definition in t
 
 Example:
 
-de
-  rating
-    "1": sehr schlecht
-    "2": schlecht
-    "3": mittelmäßig
-    "4": gut
-    "5": sehr gut
+	de
+  		rating
+    		"1": sehr schlecht
+		    "2": schlecht
+		    "3": mittelmäßig
+		    "4": gut
+		    "5": sehr gut
 
 
 
