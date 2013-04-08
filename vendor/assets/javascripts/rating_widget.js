@@ -55,8 +55,8 @@
     
       // create the cancel
       if (true == this.options.showCancel) {
-        $("<a/>").prop({
-          className: "ui-rating-cancel ui-rating-cancel-empty",
+        $("<a />", {
+          class: "ui-rating-cancel ui-rating-cancel-empty",
           title: this.options.cancelTitle
         }).appendTo(elm);
       }
@@ -65,10 +65,10 @@
       $('option', element).each( function() {
         // only convert options with a value
         if(this.value!="") {
-          $("<a/>").prop({
-            className: "ui-rating-star ui-rating-empty",
+          $("<a />", {
+            class: "ui-rating-star ui-rating-empty",
             title: $(this).text(),   // perserve the option text as a title.
-            value: this.value        // perserve the value.
+            'data-value': this.value // perserve the value.
           }).appendTo(elm);
         }
       });
@@ -156,7 +156,7 @@
         .prop("className", "ui-rating-cancel ui-rating-cancel-empty");
         
         //Use our value
-        value = elm.attr("value");
+        value = elm.data("value");
       }
       
       //Set the select box to the new value
